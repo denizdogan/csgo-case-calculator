@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import "normalize.css";
 
 $white: #fff;
 $dark: #1b242f;
@@ -27,7 +28,35 @@ body {
   background-position: 50% 17%;
   color: $fg-color;
 
-  @media (min-width: 1400px) {
+  @media (min-width: 1000px) {
     background-image: url("../img/csgo-full-min.jpg");
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  > .inner {
+    align-self: center;
+    padding: 3em 2em;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 1em;
+
+    > .field {
+      margin-top: 1.4em;
+      display: flex;
+      flex-direction: column;
+
+      > label {
+        margin-bottom: 0.8em;
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 }
