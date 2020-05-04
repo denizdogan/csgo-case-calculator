@@ -1,7 +1,9 @@
 module Main exposing (..)
 
 import Browser
+import Browser.Events exposing (onResize)
 import Decimal as D exposing (Decimal)
+import Element exposing (Device, classifyDevice)
 import Html exposing (Html, div, input, text)
 import Html.Attributes exposing (class, disabled, type_, value)
 import Html.Events exposing (onInput)
@@ -12,15 +14,23 @@ import Html.Events exposing (onInput)
 
 
 type alias Model =
-    { wallet : Decimal
+    { device : Device
+    , wallet : Decimal
     , caseCost : Decimal
     , keyCost : Decimal
     }
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( { wallet = Maybe.withDefault D.zero <| D.fromString "15"
+type alias Flags =
+    { width : Int
+    , height : Int
+    }
+
+
+init : Flags -> ( Model, Cmd Msg )
+init flags =
+    ( { device = classifyDevice flags
+      , wallet = Maybe.withDefault D.zero <| D.fromString "15"
       , caseCost = Maybe.withDefault D.zero <| D.fromString "0.85"
       , keyCost = Maybe.withDefault D.zero <| D.fromString "2.3"
       }
@@ -36,6 +46,7 @@ type Msg
     = SetWalletAmount String
     | SetCaseCost String
     | SetKeyCost String
+    | DeviceClassified Device
 
 
 emptyToZero : String -> Decimal -> Decimal
@@ -51,6 +62,9 @@ emptyToZero s def =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        DeviceClassified device ->
+            ( { model | device = device }, Cmd.none )
+
         SetWalletAmount s ->
             ( { model | wallet = emptyToZero s model.wallet }, Cmd.none )
 
@@ -121,11 +135,18 @@ view model =
 ---- PROGRAM ----
 
 
-main : Program () Model Msg
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    onResize <|
+        \width height ->
+            DeviceClassified (Element.classifyDevice { width = width, height = height })
+
+
+main : Program Flags Model Msg
 main =
     Browser.element
         { view = view
-        , init = \_ -> init
+        , init = init
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = subscriptions
         }
