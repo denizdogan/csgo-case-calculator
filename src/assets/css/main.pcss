@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 @import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 $white: #fff;
 $dark: #1b242f;
@@ -31,6 +31,15 @@ body {
   @media (min-width: 1000px) {
     background-image: url("../img/csgo-full-min.jpg");
   }
+}
+
+input[type="number"] {
+  border: 0;
+  padding: 4px 6px;
+}
+
+input[disabled] {
+  color: red;
 }
 
 .wrapper {
