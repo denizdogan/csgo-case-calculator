@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
+$white: #fff;
+$dark: #1b242f;
+
+$font: "Roboto", sans-serif;
+$fg-color: $white;
+$bg-color: $dark;
+
 /*
   elm-hot creates an additional div wrapper around the app to make HMR possible.
   This could break styling in development mode if you are using Elm UI.
@@ -12,5 +19,15 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: $font;
+  background-color: $bg-color;
+  background-image: url("../img/csgo-crop-min.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50% 17%;
+  color: $fg-color;
+
+  @media (min-width: 1400px) {
+    background-image: url("../img/csgo-full-min.jpg");
+  }
 }
