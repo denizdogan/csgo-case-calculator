@@ -1,7 +1,6 @@
 module Main exposing (..)
 
 import Browser
-import Browser.Events exposing (onResize)
 import Decimal as D exposing (Decimal)
 import Element exposing (Device, classifyDevice)
 import Html exposing (Html, div, input, label, text)
@@ -46,7 +45,6 @@ type Msg
     = SetWalletAmount String
     | SetCaseCost String
     | SetKeyCost String
-    | DeviceClassified Device
 
 
 emptyToZero : String -> Decimal -> Decimal
@@ -62,9 +60,6 @@ emptyToZero s def =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        DeviceClassified device ->
-            ( { model | device = device }, Cmd.none )
-
         SetWalletAmount s ->
             ( { model | wallet = emptyToZero s model.wallet }, Cmd.none )
 
@@ -174,9 +169,7 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    onResize <|
-        \width height ->
-            DeviceClassified (Element.classifyDevice { width = width, height = height })
+    Sub.none
 
 
 main : Program Flags Model Msg
