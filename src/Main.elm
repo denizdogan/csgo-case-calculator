@@ -2,7 +2,6 @@ module Main exposing (..)
 
 import Browser
 import Decimal as D exposing (Decimal)
-import Element exposing (Device, classifyDevice)
 import Html exposing (Html, div, input, label, text)
 import Html.Attributes exposing (class, disabled, for, name, type_, value)
 import Html.Events exposing (onInput)
@@ -13,8 +12,7 @@ import Html.Events exposing (onInput)
 
 
 type alias Model =
-    { device : Device
-    , wallet : Decimal
+    { wallet : Decimal
     , caseCost : Decimal
     , keyCost : Decimal
     }
@@ -28,8 +26,7 @@ type alias Flags =
 
 init : Flags -> ( Model, Cmd Msg )
 init flags =
-    ( { device = classifyDevice flags
-      , wallet = Maybe.withDefault D.zero <| D.fromString "15"
+    ( { wallet = Maybe.withDefault D.zero <| D.fromString "15"
       , caseCost = Maybe.withDefault D.zero <| D.fromString "0.85"
       , keyCost = Maybe.withDefault D.zero <| D.fromString "2.3"
       }
@@ -138,7 +135,7 @@ view model =
             , div [ class "field" ]
                 [ label
                     [ for "num-keys" ]
-                    [ text "Number of keys to buy:" ]
+                    [ text "# of keys afforded:" ]
                 , input
                     [ name "num-keys", type_ "number", disabled True, value <| D.toString numKeys ]
                     []
