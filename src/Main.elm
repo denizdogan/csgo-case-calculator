@@ -2,8 +2,9 @@ module Main exposing (..)
 
 import Browser
 import Decimal as D exposing (Decimal)
-import Html exposing (Html, div, input, label, text)
-import Html.Attributes exposing (class, disabled, for, name, type_, value)
+import GitHub exposing (github)
+import Html exposing (Html, a, div, input, label, text)
+import Html.Attributes exposing (class, disabled, for, href, name, type_, value)
 import Html.Events exposing (onInput)
 
 
@@ -104,57 +105,62 @@ view model =
             else
                 D.fromInt 0
     in
-    div
-        [ class "wrapper" ]
+    div []
         [ div
-            [ class "inner" ]
-            [ div [ class "field" ]
-                [ label
-                    [ for "wallet-amount" ]
-                    [ text "Wallet amount:" ]
-                , input
-                    [ name "wallet-amount", type_ "number", onInput SetWalletAmount, value <| D.toString model.wallet ]
-                    []
-                ]
-            , div [ class "field" ]
-                [ label
-                    [ for "case-cost" ]
-                    [ text "Case cost:" ]
-                , input
-                    [ name "case-cost", type_ "number", onInput SetCaseCost, value <| D.toString model.caseCost ]
-                    []
-                ]
-            , div [ class "field" ]
-                [ label
-                    [ for "key-cost" ]
-                    [ text "Key cost:" ]
-                , input
-                    [ name "key-cost", type_ "number", onInput SetKeyCost, value <| D.toString model.keyCost ]
-                    []
-                ]
-            , div [ class "field" ]
-                [ label
-                    [ for "num-keys" ]
-                    [ text "# of keys afforded:" ]
-                , input
-                    [ name "num-keys", type_ "number", disabled True, value <| D.toString numKeys ]
-                    []
-                ]
-            , div [ class "field" ]
-                [ label
-                    [ for "total-cost" ]
-                    [ text "Total cost:" ]
-                , input
-                    [ name "total-cost", type_ "number", disabled True, value <| D.toString totalCost ]
-                    []
-                ]
-            , div [ class "field" ]
-                [ label
-                    [ for "amount-left" ]
-                    [ text "Amount left:" ]
-                , input
-                    [ name "amount-left", type_ "number", disabled True, value <| D.toString amountLeft ]
-                    []
+            [ class "github" ]
+            [ a [ href "https://github.com/denizdogan/csgo-case-calculator" ] [ github ] ]
+        , div
+            [ class "wrapper" ]
+            [ div
+                [ class "inner" ]
+                [ div [ class "field" ]
+                    [ label
+                        [ for "wallet-amount" ]
+                        [ text "Wallet amount:" ]
+                    , input
+                        [ name "wallet-amount", type_ "number", onInput SetWalletAmount, value <| D.toString model.wallet ]
+                        []
+                    ]
+                , div [ class "field" ]
+                    [ label
+                        [ for "case-cost" ]
+                        [ text "Case cost:" ]
+                    , input
+                        [ name "case-cost", type_ "number", onInput SetCaseCost, value <| D.toString model.caseCost ]
+                        []
+                    ]
+                , div [ class "field" ]
+                    [ label
+                        [ for "key-cost" ]
+                        [ text "Key cost:" ]
+                    , input
+                        [ name "key-cost", type_ "number", onInput SetKeyCost, value <| D.toString model.keyCost ]
+                        []
+                    ]
+                , div [ class "field" ]
+                    [ label
+                        [ for "num-keys" ]
+                        [ text "# of keys afforded:" ]
+                    , input
+                        [ name "num-keys", type_ "number", disabled True, value <| D.toString numKeys ]
+                        []
+                    ]
+                , div [ class "field" ]
+                    [ label
+                        [ for "total-cost" ]
+                        [ text "Total cost:" ]
+                    , input
+                        [ name "total-cost", type_ "number", disabled True, value <| D.toString totalCost ]
+                        []
+                    ]
+                , div [ class "field" ]
+                    [ label
+                        [ for "amount-left" ]
+                        [ text "Amount left:" ]
+                    , input
+                        [ name "amount-left", type_ "number", disabled True, value <| D.toString amountLeft ]
+                        []
+                    ]
                 ]
             ]
         ]
