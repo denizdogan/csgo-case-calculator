@@ -140,7 +140,7 @@ view model =
                 , div [ class "field" ]
                     [ label
                         [ for "num-keys" ]
-                        [ text "# of keys afforded:" ]
+                        [ text "# of cases afforded:" ]
                     , input
                         [ name "num-keys", type_ "number", disabled True, value <| D.toString numKeys ]
                         []
